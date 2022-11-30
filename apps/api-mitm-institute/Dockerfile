@@ -1,6 +1,7 @@
 FROM node:16-alpine AS builder
 RUN apk add --no-cache libc6-compat
 RUN apk update
+
 # Set working directory
 WORKDIR /app
 RUN yarn global add turbo
@@ -12,7 +13,6 @@ FROM node:16-alpine AS installer
 RUN apk add --no-cache libc6-compat
 RUN apk update
 WORKDIR /app
-
 # First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .

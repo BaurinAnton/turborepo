@@ -8,7 +8,7 @@ COPY . .
 RUN turbo prune --scope=api-mitm-institute --docker
 
 # Add lockfile and package.json's of isolated subworkspace
-FROM node:alpine AS installer
+FROM node:16-alpine AS installer
 RUN apk add --no-cache libc6-compat
 RUN apk update
 WORKDIR /app
@@ -24,7 +24,7 @@ COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 RUN yarn turbo run build --filter=api-mitm-institute...
 
-FROM node:alpine AS runner
+FROM node:16-alpine AS runner
 WORKDIR /app  
 
 # Don't run production as root

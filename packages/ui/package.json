@@ -1,0 +1,27 @@
+{
+  "name": "ui",
+  "version": "0.0.0",
+  "main": "./index.tsx",
+  "types": "./index.tsx",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\""
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "@types/styled-components": "^5.1.26",
+    "eslint": "8.28.0",
+    "eslint-config-custom": "*",
+    "next": "13.0.5",
+    "react": "18.2.0",
+    "styled-components": "^5.3.6",
+    "styled-normalize": "^8.0.7",
+    "ts-toolbelt": "^9.6.0",
+    "tsconfig": "*",
+    "typescript": "^4.9.3"
+  },
+  "resolutions": {
+    "styled-components": "^5"
+  }
+}

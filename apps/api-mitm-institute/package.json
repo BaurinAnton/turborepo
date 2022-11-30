@@ -1,0 +1,30 @@
+{
+  "name": "api-mitm-institute",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
+  "scripts": {
+    "dev": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@strapi/strapi": "4.5.2",
+    "@strapi/plugin-users-permissions": "4.5.2",
+    "@strapi/plugin-i18n": "4.5.2",
+    "pg": "8.6.0"
+  },
+  "author": {
+    "name": "70-7h3-m00n"
+  },
+  "strapi": {
+    "uuid": "afcfa19f-3a41-4f7c-9d40-2d7bb3468a1d"
+  },
+  "engines": {
+    "node": ">=14.19.1 <=18.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}

@@ -1,7 +1,7 @@
+# Создаем out 
 FROM node:16-alpine AS builder
 RUN apk add --no-cache libc6-compat
 RUN apk update
-
 # Set working directory
 WORKDIR /app
 RUN yarn global add turbo
@@ -10,13 +10,13 @@ RUN turbo prune --scope=api-mitm-institute --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM node:16-alpine AS installer
-RUN apk add --no-cache libc6-compat
-RUN apk update
+RUN apk update && apk add --no-cache libc6-compat build-base gcc autoconf automake zlib-dev libpng-dev vips-dev && rm -rf /var/cache/apk/* > /dev/null 2>&1
+ENV NODE_ENV=${NODE_ENV}
 WORKDIR /app
-# First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/yarn.lock ./yarn.lock
+ENV PATH /app/node_modules/.bin:$PATH
 RUN yarn install
 
 # Build the project
@@ -24,20 +24,12 @@ COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 RUN yarn turbo run build --filter=api-mitm-institute...
 
-FROM node:16-alpine AS runner
-WORKDIR /app  
-
-# Don't run production as root
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-USER nextjs
-
-COPY --from=installer /app/apps/api-mitm-institute/next.config.js .
-COPY --from=installer /app/apps/api-mitm-institute/package.json .
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=installer --chown=nextjs:nodejs /app/apps/api-mitm-institute/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/api-mitm-institute/.next/static ./apps/api-mitm-institute/.next/static
-
-CMD node apps/api-mitm-institute/server.js
+# Strapi start
+FROM node:16-alpine
+RUN apk add vips-dev
+RUN rm -rf /var/cache/apk/*
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+WORKDIR /app
+COPY --from=installer /app/ .
+ENV PATH /opt/node_modules/.bin:$PATH

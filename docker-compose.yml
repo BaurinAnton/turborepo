@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  prod-api-mitm-institute:
+    container_name: prod-api-mitm-institute
+    build:
+      context: .
+      dockerfile: ./apps/api-mitm-institute/Dockerfile
+    restart: always
+    ports:
+      - 3001:3001

@@ -37,7 +37,7 @@ COPY --from=installer /app/apps/api-mitm-institute/package.json .
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=installer --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/api-mitm-institute/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/api-mitm-institute/.next/static ./apps/api-mitm-institute/.next/static
 
-CMD node apps/web/server.js
+CMD node apps/api-mitm-institute/server.js

@@ -1,4 +1,4 @@
-name: prod-api-mitm-institute
+name: prod-turbo-ci
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./Dockerfile
+          file: ./apps/api-mitm-institute/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/prod-api-mitm-institute:${{ env.GITHUB_SHA_CUSTOMIZE }}

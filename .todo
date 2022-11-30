@@ -1,0 +1,8 @@
+# TODO
+
+- Figure out the correct license
+- Figure out `vercel.json` cache headers better
+- Figure out `.vercelignore` file better
+- Figure out better `.prettierrc.yaml` & `.prettierignore`
+- Figure out better `.eslintignore` file
+- Figure out a command to wipe all node_modules

@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "@manypkg/cli": "latest",
-    "eslint-config-custom": "*",
     "prettier": "latest",
     "turbo": "latest"
   },
